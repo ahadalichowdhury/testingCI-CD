@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: build docker file
-        run: docker build .-t ahadalichowdhury/testing-nodejs
+        run: docker build . -t ahadalichowdhury/testing-nodejs
       - name: Login to DockerHub
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
