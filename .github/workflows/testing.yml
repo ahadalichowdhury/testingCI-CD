@@ -24,3 +24,17 @@ jobs:
         run: echo "${DOCKER_TOKEN}" | docker login -u "${DOCKER_USERNAME}" --password-stdin
       - name: Push to Dockerhub
         run: docker push ahadalichowdhury/testing-nodejs
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: pull docker image
+        runs-on: [ip-172-31-22-138]
+        steps:
+          - uses: actions/checkout@v2
+          - name: pull docker image
+            run: docker pull ahadalichowdhury/testing-nodejs
+          - name: delete old container
+            run: docker rm -f nodejs-app-container
+          - name: run docker image
+            run: docker run -d -p 6001:5000 --name nodejs-app-container ahadalichowdhury/testing-nodejs
