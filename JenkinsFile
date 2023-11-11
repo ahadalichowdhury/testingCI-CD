@@ -30,13 +30,15 @@ pipeline {
                
             }
         }
+       stage('delete old container') {
+            steps {
+               sh "sudo docker rm -f sixth-app-container"
+               
+            }
+        }
         stage('deploy'){
             steps {
                 script {
-                    // Stop and remove the existing container (if it exists)
-                    sh "docker ps -q --filter name=$CONTAINER_NAME | xargs -r docker stop"
-                    sh "docker ps -q --filter name=$CONTAINER_NAME | xargs -r docker rm"
-
                     // Pull the Docker image on the deployment server
                     sh "docker pull $IMAGE_NAME"
 
