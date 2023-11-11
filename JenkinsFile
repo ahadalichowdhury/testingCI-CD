@@ -32,7 +32,7 @@ pipeline {
         }
        stage('delete old container') {
             steps {
-               sh "sudo docker rm -f sixth-app-container"
+               sh "docker rm -f sixth-app-container"
                
             }
         }
