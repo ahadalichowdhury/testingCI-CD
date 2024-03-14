@@ -20,7 +20,7 @@ pipeline {
         }
         stage('docker login project') {
             steps {
-               sh "docker login -u ahadalichowdhury -p Ahad123@24423"
+               sh "docker login -u ahadalichowdhury -p <password>"
                
             }
         }
